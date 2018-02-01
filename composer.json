@@ -1,0 +1,20 @@
+{
+    "name": "skaffille/flow-psy",
+    "type": "neos-framework",
+    "description": "Adapter to run PSY shell in the Environment of your FLOW app",
+    "license": "MIT",
+    "support": {
+        "email": "sven.kaffille@gmx.de"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skaffille\\Flow\\Tools\\": "Classes"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "neos/flow": "~4.2.0",
+        "psy/psysh": "@stable"
+    }
+}

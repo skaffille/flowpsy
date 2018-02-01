@@ -1,0 +1,23 @@
+<?php
+namespace Skaffille\Flow\Tools\Command;
+
+use Neos\Flow\Cli\CommandController;
+use Neos\Flow\Annotations as Flow;
+
+/**
+ * @Flow\Scope("singleton")
+ */
+class ConsoleCommandController extends CommandController
+{
+   /**
+     * @Flow\Inject
+     * @var Skaffille\Flow\Tools\Service\ConsoleService
+     */
+    protected $console;
+
+    public function runCommand()
+    {
+        echo 'Starting ...';
+        $this->console->run();
+    }
+}

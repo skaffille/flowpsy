@@ -1,0 +1,49 @@
+<?php
+namespace Skaffille\Flow\Tools\Service;
+
+use Psy\Shell;
+use Neos\Flow\Annotations as Flow;
+use \Neos\Flow\ObjectManagement\ObjectManagerInterface as ObjectManager;
+
+/**
+ * Class ConsoleService
+ *
+ * @FLow\Scope("singleton")
+ */
+class ConsoleService
+{
+    /**
+     * @Flow\Inject
+     * @var ObjectManager
+     */
+    protected $objectManager;
+
+    public function run()
+    {
+        global $console_service;
+        $console_service = $this;
+	// flow fails in loading these classes as _ is part of namespaces for flow class loading
+        \PhpParser\Autoloader::register();
+        $shell = new Shell();
+        $shell->run();
+    }
+
+    /**
+     * @return ObjectManager
+     */
+    public function getObjectManager(): ObjectManager
+    {
+        return $this->objectManager;
+    }
+
+    /**
+     * @param string $name
+     * @return object
+     * @throws \Neos\Flow\Object\Exception\UnknownObjectException
+     */
+    public function getObject(string $name)
+    {
+        $name = str_replace('.', '\\', $name);
+        return $this->objectManager->get($name);
+    }
+}
